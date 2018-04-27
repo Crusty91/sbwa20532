@@ -20,7 +20,7 @@ namespace sbwa20532
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Models.WeatherForecastContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings:DefaultConnection")));
 
             services.AddMvc();
         }
