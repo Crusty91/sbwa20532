@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using sbwa20532.Models;
+using System;
 
 namespace sbwa20532
 {
@@ -19,27 +21,22 @@ namespace sbwa20532
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Models.WeatherForecastContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings:DefaultConnection")));
-
+            services.AddDbContext<WeatherForecastContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
+
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
                     HotModuleReplacement = true
                 });
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+
 
             app.UseStaticFiles();
 
